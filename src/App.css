@@ -1,32 +1,57 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.navbar {
+  position:fixed;
+  background-color: #73655E;
   color: white;
+  width: 100%;
+  height: 60px;
+}
+.navbar_nav{
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.navLogo {
+  color: white;
+  text-decoration:none;
+  height: 1.5rem;
+  font-size: 2rem;
+  padding: 1rem 1rem 1rem;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.navInput{
+  display: flex;
+  justify-content: flex-end;
+  width: 500px;
+  padding:1rem 1rem;
+  margin-left: 400px;
+  
+}
+.sidebar{
+  display: flex;
+  background-color: #78AB35;
+  height: 100%;
+  width: 35%;
+  margin-top: 70px;
+
+}
+.venueList{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.listItem {
+  display: inline-block;
+  margin-top: 70px;
+  background-color: white;
+  color:  #73655E;
+  align-items: center;
+  margin: 15%;
+  width: 70%;
+
+  
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.mapFrame {
+  display:flex;
 }

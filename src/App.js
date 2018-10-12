@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
-import MapContainer from './MapContainer';
+
+
 
  class App extends Component {
   constructor(props){
@@ -10,18 +11,32 @@ import MapContainer from './MapContainer';
       this.state={
         
       };
+
     }
     componentDidMount() {
-    
+      this.loadMap();
+     
     }
-  
+      loadMap = () => {
+      loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyAGLWvOb4JYsG5LujGnURa4qVYfh03EB_Y&callback=initMap")
+      window.initMap = this.initMap;
+    }
+    initMap=()=> {
+          const map = new window.google.maps.Map(document.getElementById('map'), {
+          center: {lat: 34.06480, lng: -84.022340},
+          zoom: 8
+        });
+      }
+      
+    
     render() {
       
         return (
           <div>
             <Navbar />
             <Sidebar />
-            <MapContainer />
+            <div id='map'></div>
+            
           </div>
           
             
@@ -29,7 +44,15 @@ import MapContainer from './MapContainer';
                
                 
         );
+        
       }
     }
-  
+  function loadScript(url){
+      let index = window.document.getElementsByTagName('script')[0];
+      let script = window.document.createElement('script');
+      script.async = true;
+      script.defer = true;
+      script.src = url;
+      index.parentNode.insertBefore(script, index);
+    }
 export default App;

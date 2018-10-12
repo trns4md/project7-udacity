@@ -3,7 +3,8 @@
   background-color: #73655E;
   color: white;
   width: 100%;
-  height: 60px;
+  height: 10%;
+  top: 0;
 }
 .navbar_nav{
   display: flex;
@@ -24,11 +25,12 @@
   justify-content: flex-end;
   width: 500px;
   padding:1rem 1rem;
-  margin-left: 400px;
+  margin-left: 300px;
   
 }
 .sidebar{
   display: flex;
+  flex: 1;
   background-color: #78AB35;
   height: 100%;
   width: 35%;
@@ -52,6 +54,9 @@
   
 }
 
-.mapFrame {
-  display:flex;
+.map {
+  display: flex;
+  flex: 2;
+  height: 100vh;
+  width: 100%;
 }

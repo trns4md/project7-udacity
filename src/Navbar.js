@@ -8,7 +8,7 @@ class Navbar extends Component {
       render() {
         
           return (
-              <div>
+              
               <header className='navbar'>
                   <nav className='navbar_nav'>
                    
@@ -16,7 +16,7 @@ class Navbar extends Component {
                     <input  className='navInput' type='text' placeholder='Filter Venues' />
                   </nav>
               </header>
-            </div>
+            
                  
                   
           )

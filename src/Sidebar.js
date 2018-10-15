@@ -6,12 +6,7 @@ class Sidebar extends Component {
     return (
       <div className='sidebar'>
         <ul className='venueList'>
-          <li className='listItem'>
-          Restaurant:
-          Address:
-          Phone:
-          <img></img>
-          </li>
+          <li className='listItem'>E Center</li>
           <li className='listItem'>Grocery Store</li>
           <li className='listItem'>Gas Station</li>
           <li className='listItem'>Eagle Theater</li>

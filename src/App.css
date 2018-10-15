@@ -1,5 +1,5 @@
 .navbar {
-  position:fixed;
+  position: absolute;
   background-color: #73655E;
   color: white;
   width: 100%;
@@ -10,6 +10,7 @@
   display: flex;
   align-items: center;
   height: 100%;
+  overflow: hidden;
 }
 .navLogo {
   color: white;
@@ -29,12 +30,10 @@
   
 }
 .sidebar{
-  display: flex;
-  flex: 1;
   background-color: #78AB35;
   height: 100%;
   width: 35%;
-  margin-top: 70px;
+  margin-top: 4%;
 
 }
 .venueList{
@@ -43,23 +42,30 @@
   padding: 0;
 }
 .listItem {
-  display: inline-block;
-  margin-top: 70px;
+  margin-top: auto;
   background-color: white;
   color:  #73655E;
   align-items: center;
   margin: 15%;
   width: 70%;
-
-  
 }
 
-
-.map {
+#map {
+  display:flex;
+  flex: 2 auto;
   height: 100vh;
+  margin-top: 4.8%;
+}
+body{
+  height:100%;
+  margin:0;
+  padding:0;
 }
 
-html, body {
+.container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   height: 100%;
   margin: 0;
   padding: 0;

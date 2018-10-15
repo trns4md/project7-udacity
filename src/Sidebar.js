@@ -17,11 +17,8 @@ class Sidebar extends Component {
           <li className='listItem'>Eagle Theater</li>
           <li className='listItem'>ChillyBean Coffee</li>
           <li className='listItem'>Daddy O'Brian's</li>
-          <li className='listItem'>Grocery Store</li>
-          <li className='listItem'>Gas Station</li>
-          <li className='listItem'>Eagle Theater</li>
-          <li className='listItem'>ChillyBean Coffee</li>
-          <li className='listItem'>Daddy O'Brian's</li>
+         
+        
         </ul>
       </div>
     );

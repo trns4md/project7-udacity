@@ -23,8 +23,8 @@ import Sidebar from './Sidebar';
     }
     initMap=()=> {
           const map = new window.google.maps.Map(document.getElementById('map'), {
-          center: {lat: 34.06480, lng: -84.022340},
-          zoom: 8
+          center: {lat: 34.1064895, lng: -84.0335197},
+          zoom: 13
         });
       }
       
@@ -32,7 +32,7 @@ import Sidebar from './Sidebar';
     render() {
       
         return (
-          <div>
+          <div className="container">
             <Navbar />
             <Sidebar />
             <div id='map'></div>

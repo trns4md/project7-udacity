@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import './App.css';
-import Navbar from './Navbar';
+import Navigation from './Navigation';
 import Sidebar from './Sidebar';
 import axios from 'axios';
 import MapContainer from './MapContainer';
-
+import { 
+  Grid,
+  Row,
+  Col,
+ } from 'react-bootstrap';
 
  class App extends Component {
   constructor(props){
@@ -32,7 +36,7 @@ import MapContainer from './MapContainer';
       .then(response =>{
         this.setState({
           venues:response.data.response.groups[0].items
-        },)//this.loadMap())
+        },)
         console.log(response);
       })
       .catch(error=>{
@@ -71,12 +75,17 @@ import MapContainer from './MapContainer';
     render() {
       
         return (
-          <div className="container">
-            <Navbar />
-            <Sidebar />
-            <MapContainer venues={this.state.venues}/>
-            
-          </div>
+          <Grid>
+              <Navigation />
+            <Row className='showGrid'>
+              <Col xs={12} md={4}>
+                <Sidebar />
+              </Col>
+              <Col xs={12} md={8}>
+                <MapContainer venues={this.state.venues}/>
+              </Col>
+            </Row>
+          </Grid>
           
             
           

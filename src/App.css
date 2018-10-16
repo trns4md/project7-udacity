@@ -3,11 +3,11 @@
   background-color: #73655E;
   color: white;
   width: 100%;
-  height: 10%;
+  height: 8%;
   top: 0;
 }
-.navbar_nav{
-  display: flex;
+.nav{
+
   align-items: center;
   height: 100%;
   overflow: hidden;
@@ -19,22 +19,16 @@
   font-size: 2rem;
   padding: 1rem 1rem 1rem;
   text-align: center;
-  margin-bottom: 3rem;
+  margin-top:1%;
 }
 .navInput{
-  display: flex;
-  justify-content: flex-end;
   width: 500px;
-  padding:1rem 1rem;
-  margin-left: 300px;
-  
+  padding:1rem;
+  margin-left: 50%;
+  margin-top:1%;
 }
 .sidebar{
   background-color: #78AB35;
-  height: 100%;
-  width: 35%;
-  margin-top: 4%;
-
 }
 .venueList{
   list-style-type: none;
@@ -63,10 +57,22 @@ body{
 }
 
 .container{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+
   height: 100%;
   margin: 0;
   padding: 0;
+}
+@media only screen and (max-width:600px){
+  .navInput{
+    width: 80%;
+    padding:1rem;
+    margin-left: 50%;
+    margin-top:1%;
+  }
+}
+@media only screen and (min-width:768px){
+
+}
+@media only screen and (min-width:992px){
+  
 }

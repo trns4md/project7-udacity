@@ -1,74 +1,49 @@
-.navbar {
-  position: absolute;
+#navbar {
   background-color: #73655E;
   color: white;
   width: 100%;
-  height: 8%;
-  top: 0;
 }
-.nav{
-
-  align-items: center;
+#nav{
   height: 100%;
-  overflow: hidden;
 }
-.navLogo {
+#navLogo {
   color: white;
   text-decoration:none;
   height: 1.5rem;
   font-size: 2rem;
-  padding: 1rem 1rem 1rem;
-  text-align: center;
-  margin-top:1%;
+  margin-bottom: 2rem;
 }
-.navInput{
-  width: 500px;
-  padding:1rem;
-  margin-left: 50%;
-  margin-top:1%;
-}
-.sidebar{
+.sidebar-sticky{
   background-color: #78AB35;
+  width:25%;
 }
 .venueList{
   list-style-type: none;
-  margin: 0;
-  padding: 0;
+
 }
 .listItem {
-  margin-top: auto;
+  
   background-color: white;
   color:  #73655E;
   align-items: center;
-  margin: 15%;
-  width: 70%;
 }
-
-/*#map {
-  display:flex;
-  flex: 2 auto;
+#map {
   height: 100vh;
-  margin-top: 4.8%;
-}*/
+  position:unset;
+  width:75%;
+}
 body{
   height:100%;
   margin:0;
   padding:0;
 }
-
-.container{
-
-  height: 100%;
-  margin: 0;
-  padding: 0;
+#sidebarCan{
+  padding:0;
+  margin:0;
 }
+
 @media only screen and (max-width:600px){
-  .navInput{
-    width: 80%;
-    padding:1rem;
-    margin-left: 50%;
-    margin-top:1%;
-  }
+ 
 }
 @media only screen and (min-width:768px){
 

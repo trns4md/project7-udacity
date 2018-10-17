@@ -1,21 +1,16 @@
 import React, { Component } from 'react';
 import './App.css';
+import VenueList from './VenueList';
 
 class Sidebar extends Component {
   render() {
+    
     return (
-      <div className='sidebar'>
-        <ul className='venueList'>
-          <li className='listItem'>E Center</li>
-          <li className='listItem'>Grocery Store</li>
-          <li className='listItem'>Gas Station</li>
-          <li className='listItem'>Eagle Theater</li>
-          <li className='listItem'>ChillyBean Coffee</li>
-          <li className='listItem'>Daddy O'Brian's</li>
-         
-        
-        </ul>
-      </div>
+      <nav id='sidebarCan'className='col-md-2'>
+        <div className='sidebar-sticky'>
+         <VenueList venues={this.props.venues}/>
+        </div> 
+      </nav>
     );
   }
 }

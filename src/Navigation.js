@@ -1,31 +1,18 @@
 import React, { Component } from 'react';
 import './App.css';
-import { 
-    Navbar, 
-    FormGroup, 
-    FormControl, 
-    Col,
-} from 'react-bootstrap'
+
 
 
 class Navigation extends Component {    
       render() {
           return (
-              <Navbar className='navbar_nav'>
-                {'<Col xs={12} md={8} />'}
-                <Navbar.Header className='navbar'>
-                <Navbar.Brand>
-                    <a href='#'className='navLogo'>Sugar Hill Neighborhood Map</a>
-                </Navbar.Brand> 
-                </Navbar.Header>
-                <Navbar.Collapse>
-                    <Navbar.Form >
-                    <FormGroup>
-                        <FormControl className="navInput"type="text" placeholder="Filter Venues" />
-                    </FormGroup>{' '}
-                    </Navbar.Form>
-                </Navbar.Collapse>      
-              </Navbar>  
+            <nav id='navbar'className="navbar top-bar fixed">
+            <a id='navLogo'className="navbar-brand">Sugar Hill Neighborhood Map</a>
+            <form className="form-inline">
+              <input id='navInput' className="form-control mr-sm-2" type="search" placeholder="Filter Venues" aria-label="Search" />
+              <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Filter</button>
+            </form>
+          </nav>
           )
         }
       }

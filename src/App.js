@@ -4,11 +4,7 @@ import Navigation from './Navigation';
 import Sidebar from './Sidebar';
 import axios from 'axios';
 import MapContainer from './MapContainer';
-import { 
-  Grid,
-  Row,
-  Col,
- } from 'react-bootstrap';
+
 
  class App extends Component {
   constructor(props){
@@ -43,64 +39,19 @@ import {
         console.log('ERROR' + error);
       })
     }
-    /*/Loading the Map
-      loadMap = () => {
-      loadScript("https://maps.googleapis.com/maps/api/js?key=AIzaSyAGLWvOb4JYsG5LujGnURa4qVYfh03EB_Y&callback=initMap")
-      window.initMap = this.initMap;
-    }
-    //Initialize the Google Map
-    initMap=()=> {
-          const map = new window.google.maps.Map(document.getElementById('map'), {
-          center: {lat: 34.1064895, lng: -84.0335197},
-          zoom: 13
-        }); 
-        //Create Info Window
-        var infowindow = new window.google.maps.InfoWindow();
-        //Create Marker
-        this.state.venues.map(myVenue=>{
-         var marker = new window.google.maps.Marker({
-          position: {lat: myVenue.venue.location.lat, lng: myVenue.venue.location.lng},
-          map: map,
-          title: myVenue.venue.name,
-          }); 
-          //Open Info Window on Map
-          marker.addListener('click', function(){
-            infowindow.setContent();
-            infowindow.open(map, marker);
-          })
-        })  
-      }*/
-  
-    
     render() {
       
         return (
-          <Grid>
+          <div>
               <Navigation />
-            <Row className='showGrid'>
-              <Col xs={12} md={4}>
-                <Sidebar />
-              </Col>
-              <Col xs={12} md={8}>
-                <MapContainer venues={this.state.venues}/>
-              </Col>
-            </Row>
-          </Grid>
-          
-            
-          
-               
-                
+            <div className='row'>
+              <Sidebar venues={this.state.venues} />
+              <MapContainer venues={this.state.venues}/>
+            </div>
+          </div>               
         );
         
       }
     }
- /* function loadScript(url){
-      let index = window.document.getElementsByTagName('script')[0];
-      let script = window.document.createElement('script');
-      script.async = true;
-      script.defer = true;
-      script.src = url;
-      index.parentNode.insertBefore(script, index);
-    }*/
+ 
 export default App;

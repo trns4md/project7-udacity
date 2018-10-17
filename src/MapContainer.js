@@ -6,24 +6,30 @@ export class MapContainer extends Component {
     
   render() {
     return (
-      <Map 
-      google={this.props.google} 
-      zoom={14}
-      initialCenter={{
-          lat:34.1064895,
-          lng:-84.0335197,
-      }}
-      onClick={this.onMapClicked}>
- 
-        <Marker onClick={this.onMarkerClick}
-                name={'Current location'} />
- 
-        <InfoWindow onClose={this.onInfoWindowClose}>
-            <div>
-              <h1>{}</h1>
+            <div className='container-fluid'>
+                <div className='col-md-9'>
+                <Map
+                    id='map' 
+                    google={this.props.google} 
+                    zoom={14}
+                    initialCenter={{
+                        lat:34.1064895,
+                        lng:-84.0335197,
+                    }}
+                    onClick={this.onMapClicked}>
+    
+                    <Marker onClick={this.onMarkerClick}
+                        name={'Current location'} />
+    
+                    <InfoWindow onClose={this.onInfoWindowClose} />
+                    <div>
+                        <h1>{}</h1>
+                    </div>
+                </Map>
             </div>
-        </InfoWindow>
-      </Map>
+        </div>
+    
+      
     );
   }
 }

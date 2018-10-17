@@ -6,7 +6,7 @@ export class MapContainer extends Component {
     
   render() {
     return (
-            <div className='container-fluid'>
+           
                 <div className='col-md-9'>
                 <Map
                     id='map' 
@@ -27,7 +27,7 @@ export class MapContainer extends Component {
                     </div>
                 </Map>
             </div>
-        </div>
+       
     
       
     );

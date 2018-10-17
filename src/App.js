@@ -44,9 +44,11 @@ import MapContainer from './MapContainer';
         return (
           <div>
               <Navigation />
-            <div className='row'>
-              <Sidebar venues={this.state.venues} />
-              <MapContainer venues={this.state.venues}/>
+              <div className='container-fluid'>
+                <div className='row'>
+                  <Sidebar className='col-md-4' venues={this.state.venues} />
+                  <MapContainer className='col-md-6 float-right' venues={this.state.venues}/>
+                </div>
             </div>
           </div>               
         );

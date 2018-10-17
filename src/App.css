@@ -1,7 +1,6 @@
 #navbar {
   background-color: #73655E;
   color: white;
-  width: 100%;
 }
 #nav{
   height: 100%;
@@ -14,6 +13,7 @@
   margin-bottom: 2rem;
 }
 .sidebar-sticky{
+  position:unset;
   background-color: #78AB35;
   width:25%;
 }
@@ -40,13 +40,27 @@ body{
 #sidebarCan{
   padding:0;
   margin:0;
+  width:100%;
+ 
+}
+#secondItem{
+  position:unset;
+}
+.things{
+  background-color: white;
+  margin:2rem;
+  
+
 }
 
 @media only screen and (max-width:600px){
  
 }
 @media only screen and (min-width:768px){
-
+  #sidebarCan{
+    max-width: 100%;
+    flex:auto;
+  }
 }
 @media only screen and (min-width:992px){
   

@@ -3,7 +3,7 @@ import './App.css';
 import Navigation from './Navigation';
 import Sidebar from './Sidebar';
 import axios from 'axios';
-import MapContainer from './MapContainer';
+
 
 
  class App extends Component {
@@ -15,8 +15,18 @@ import MapContainer from './MapContainer';
       
     }
     componentDidMount() {
-      
+      this.renderMap();
       this.getVenues();
+    }
+    renderMap = () => {
+      loadMap('https://maps.googleapis.com/maps/api/js?key=AIzaSyAGLWvOb4JYsG5LujGnURa4qVYfh03EB_Y&callback=initMap');
+      window.initMap = this.initMap;
+    }
+    initMap=()=>{
+      let map= new window.google.maps.Map(document.getElementById('map'),{
+        center: {lat: 34.1064895,lng: -84.0335197},
+        zoom: 13,
+      })
     }
     //Request to FourSquare API
     getVenues=()=>{
@@ -44,10 +54,10 @@ import MapContainer from './MapContainer';
         return (
           <div>
               <Navigation />
-              <div className='container-fluid'>
+              <div className='container'>
                 <div className='row'>
                   <Sidebar className='col-md-4' venues={this.state.venues} />
-                  <MapContainer className='col-md-6 float-right' venues={this.state.venues}/>
+                  <div id='map'className='col-md-8'></div>
                 </div>
             </div>
           </div>               
@@ -55,5 +65,13 @@ import MapContainer from './MapContainer';
         
       }
     }
+  function loadMap(url){
+    const index = window.document.getElementsByTagName('script')[0]
+    const script = window.document.createElement('script')
+    script.src = url
+    script.async = true
+    script.defer = true
+    index.parentNode.insertBefore(script, index)
+  }
  
 export default App;

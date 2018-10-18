@@ -17,24 +17,18 @@ body{
   font-size: 2rem;
   margin-bottom: 2rem;
 }
-.sidebar-sticky{
-  position:unset;
+#sidebar{
   background-color: #78AB35;
-  width:25%;
 }
 .venueList{
   list-style-type: none;
-
 }
 .listItem {
-  
   background-color: white;
   color:  #73655E;
-  align-items: center;
 }
 #map {
   height: 100vh;
-  
 }
 body{
   height:100%;
@@ -42,23 +36,15 @@ body{
   padding:0;
 }
 .container{
-  margin-left:0;
+margin-left:0;
+margin-right:0;
 }
-#sidebarCan{
-  padding:0;
-  margin:0;
-  width:100%;
- 
-}
-#secondItem{
-  position:unset;
-}
-.things{
-  background-color: white;
-  margin:2rem;
-  
 
+
+.places{
+  background-color: white;
 }
+
 
 @media only screen and (max-width:600px){
  

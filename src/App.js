@@ -40,10 +40,19 @@ import 'bootstrap/dist/css/bootstrap.css';
          let marker = new window.google.maps.Marker({
         position: {lat: myVenue.venue.location.lat, lng: myVenue.venue.location.lng},
         map: map,
-        title: myVenue.venue.name
+        title: myVenue.venue.name,
+        animation: window.google.maps.Animation.DROP,
       });
+      function toggleBounce() {
+        if (marker.getAnimation() !== null) {
+          marker.setAnimation(null);
+        } else {
+          marker.setAnimation(window.google.maps.Animation.BOUNCE);
+        }
+      }
       //Open and Infowindow
         marker.addListener('click', function(){
+          toggleBounce();
           infowindow.setContent(contentString);
           infowindow.open(map, marker);
         })

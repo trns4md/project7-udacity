@@ -12,8 +12,9 @@ import 'bootstrap/dist/css/bootstrap.css';
     super(props);
       this.state={
         venues:[],
+        query:'',
       };
-      
+      this.handleChange.bind(this);
     }
     componentDidMount() {
       
@@ -80,6 +81,11 @@ import 'bootstrap/dist/css/bootstrap.css';
         console.log('ERROR' + error);
       })
     }
+    ///Filter Venues with Sidebar Input
+  handleChange(event){
+    this.setState({query:event.target.value});
+  }
+    
     render() {
       console.log(this.state.venues)
         return (
@@ -87,7 +93,7 @@ import 'bootstrap/dist/css/bootstrap.css';
               <Navigation />
               <div className='container'>
                 <div className='row'>
-                  <Sidebar  venues={this.state.venues} />
+                  <Sidebar venues={this.state.venues} handleChange={this.state.handleChange}/>
                   <div id='map'className='col-md-8'></div>
                 </div>
             </div>

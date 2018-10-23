@@ -15,6 +15,26 @@ import 'bootstrap/dist/css/bootstrap.css';
       };
       
     }
+        //Request to FourSquare API
+        getVenues=()=>{
+          const endPoint ='https://api.foursquare.com/v2/venues/explore?';
+          const parameters={
+            client_id:'SW2YS2FRZRWQZ1ANIK5JVOZQZMFIYZDSNL3CQACSAFD4DG1U',
+            client_secret:'NXGC4A3RLMK5MC50NCZTNM5EUM0GLENKYKK51OFLTDYTKE31',
+            near:'Sugar Hill, GA',
+            v:'20181510',
+            radius: 19312.1,
+          }
+          axios.get(endPoint + new URLSearchParams(parameters))
+          .then(response =>{
+            this.setState({
+              venues:response.data.response.groups[0].items
+            }, this.renderMap())
+          })
+          .catch(error=>{
+            console.log('ERROR' + error);
+          })
+        }
     componentDidMount() {
       
       this.getVenues();
@@ -60,26 +80,7 @@ import 'bootstrap/dist/css/bootstrap.css';
       })
      
     }
-    //Request to FourSquare API
-    getVenues=()=>{
-      const endPoint ='https://api.foursquare.com/v2/venues/explore?';
-      const parameters={
-        client_id:'SW2YS2FRZRWQZ1ANIK5JVOZQZMFIYZDSNL3CQACSAFD4DG1U',
-        client_secret:'NXGC4A3RLMK5MC50NCZTNM5EUM0GLENKYKK51OFLTDYTKE31',
-        near:'Sugar Hill, GA',
-        v:'20181510',
-        radius: 19312.1,
-      }
-      axios.get(endPoint + new URLSearchParams(parameters))
-      .then(response =>{
-        this.setState({
-          venues:response.data.response.groups[0].items
-        }, this.renderMap())
-      })
-      .catch(error=>{
-        console.log('ERROR' + error);
-      })
-    }
+
     
     render() {
    

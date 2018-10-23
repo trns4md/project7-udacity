@@ -28,12 +28,8 @@ class Sidebar extends Component {
      this.setState({searchVenue: filterVenue})
   });
 };
-
-  
-
   render() {
-    
-      
+  
     return (
       <nav id='sidebar'className='col-md-4'>
         <div>

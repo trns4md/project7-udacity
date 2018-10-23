@@ -12,9 +12,8 @@ import 'bootstrap/dist/css/bootstrap.css';
     super(props);
       this.state={
         venues:[],
-        query:'',
       };
-      this.handleChange.bind(this);
+      
     }
     componentDidMount() {
       
@@ -43,6 +42,7 @@ import 'bootstrap/dist/css/bootstrap.css';
         map: map,
         title: myVenue.venue.name,
         animation: window.google.maps.Animation.DROP,
+        icon:'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
       });
       function toggleBounce() {
         if (marker.getAnimation() !== null) {
@@ -75,25 +75,20 @@ import 'bootstrap/dist/css/bootstrap.css';
         this.setState({
           venues:response.data.response.groups[0].items
         }, this.renderMap())
-        console.log(response);
       })
       .catch(error=>{
         console.log('ERROR' + error);
       })
     }
-    ///Filter Venues with Sidebar Input
-  handleChange(event){
-    this.setState({query:event.target.value});
-  }
     
     render() {
-      console.log(this.state.venues)
+   
         return (
           <div>
               <Navigation />
               <div className='container'>
                 <div className='row'>
-                  <Sidebar venues={this.state.venues} handleChange={this.state.handleChange}/>
+                  <Sidebar venues={this.state.venues} />
                   <div id='map'className='col-md-8'></div>
                 </div>
             </div>

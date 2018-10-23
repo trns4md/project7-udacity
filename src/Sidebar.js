@@ -2,23 +2,38 @@ import React, { Component } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 
+
+
 class Sidebar extends Component {
   constructor(props){
     super(props);
     this.state = {
       query:'',
+      searchVenue:[],
     }
   }
-///Filter Venues with Sidebar Input
+//Handle User Input
   handleChange(event){
     this.setState({query:event.target.value});
+    const query = event.target.value;
+    this.handleFilter(query);
+   
   }
+  //Handle Filtering Venues with Query
+  handleFilter(query){
+    const filterVenue =[];
+    this.props.venues.filter(venue=>{
+      if(venue.venue.name.toLowerCase().indexOf(query.toLowerCase()) >=0)
+      filterVenue.push(venue);
+     this.setState({searchVenue: filterVenue})
+  });
+};
+
   
+
   render() {
-    console.log(this.state.query);
-    const filteredVenues = (this.props.venues).filter((venue)=>{
-       venue.venue.name.indexOf(this.state.query);
-    })
+    
+      
     return (
       <nav id='sidebar'className='col-md-4'>
         <div>
@@ -38,7 +53,7 @@ class Sidebar extends Component {
                  />
             </div>
               <ul className='nav flex-column'>
-                {filteredVenues.map((venueItem)=>
+                {this.state.searchVenue.map((venueItem)=>
                   <li className='siteSquare' key={venueItem.venue.id}>
                     <h3 id="siteTitle"><a href={'#'}>{venueItem.venue.name}</a></h3>
                       <p>{venueItem.venue.location.formattedAddress}</p>

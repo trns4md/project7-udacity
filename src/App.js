@@ -12,9 +12,11 @@ import 'bootstrap/dist/css/bootstrap.css';
     super(props);
       this.state={
         venues:[],
-        
+        markers:[],
+        query:'',
+        searchVenue:[],
       };
-      
+      this.handleInputChange = this.handleInputChange.bind(this)
     }
         //Request to FourSquare API
         getVenues=()=>{
@@ -52,12 +54,10 @@ import 'bootstrap/dist/css/bootstrap.css';
       })
       //Creating InfoWindow
       
-      let infowindow = new window.google.maps.InfoWindow();
-
-
-      this.state.venues.map(myVenue=>{
-     let contentString = `${myVenue.venue.name}${myVenue.venue.location.formattedAddress}` 
-        //Creating a Marker
+        let infowindow = new window.google.maps.InfoWindow();
+        this.state.venues.map(myVenue=>{
+         let contentString = `${myVenue.venue.name}${myVenue.venue.location.formattedAddress}` 
+      //Creating a Marker
          let marker = new window.google.maps.Marker({
         position: {lat: myVenue.venue.location.lat, lng: myVenue.venue.location.lng},
         map: map,
@@ -79,11 +79,27 @@ import 'bootstrap/dist/css/bootstrap.css';
           infowindow.open(map, marker);
         })
       })
+     }
+     
     
-    }
+   
+    
+      
+      handleInputChange(query){
+        this.setState({query: query});
+       
+        this.handleFilter(query);
+      }
+      //Handle Filtering Venues with Query
+      handleFilter(query){
+        const filterVenue =[];
+        this.state.venues.filter(venue=>{
+          if(venue.venue.name.toLowerCase().indexOf(query.toLowerCase()) >=0)
+          filterVenue.push(venue);
+         this.setState({searchVenue: filterVenue})
+      });
+    };
   
-
-    
     render() {
 
 
@@ -92,7 +108,7 @@ import 'bootstrap/dist/css/bootstrap.css';
               <Navigation />
               <div className='container'>
                 <div className='row'>
-                  <Sidebar venues={this.state.venues} markerData={this.props.markerData}/>
+                  <Sidebar venues={this.state.venues} searchVenue={this.state.searchVenue} query={this.props.query} onFilter={this.handleInputChange}/>
                   <div id='map'className='col-md-8'></div>
                 </div>
             </div>

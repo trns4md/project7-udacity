@@ -9,31 +9,23 @@ class Sidebar extends Component {
     super(props);
     this.state = {
       query:'',
-      searchVenue:[],
     }
+    this.handleChange = this.handleChange.bind(this)
   }
  
 //Handle User Input
-  handleChange(event){
-    this.setState({query:event.target.value});
-    const query = event.target.value;
-    this.handleFilter(query);
-  }
-  //Handle Filtering Venues with Query
-  handleFilter(query){
-    const filterVenue =[];
-    this.props.venues.filter(venue=>{
-      if(venue.venue.name.toLowerCase().indexOf(query.toLowerCase()) >=0)
-      filterVenue.push(venue);
-     this.setState({searchVenue: filterVenue})
-  });
-};
+handleChange(event){
+  this.props.onFilter(event.target.value);
+  this.setState({query: event.target.value})
+}
+  
   render() {
+    const query = this.state.query
     
-    let blahblah = this.state.query.length == 0;
+    let blahblah = query == 0;
     const handler = blahblah
       ? this.props.venues
-      : this.state.searchVenue
+      : this.props.searchVenue
     
     return (
       <nav id='sidebar'className='col-md-4'>
@@ -49,8 +41,8 @@ class Sidebar extends Component {
                 placeholder="Venue Name" 
                 aria-label="Username" 
                 aria-describedby="basic-addon1"
-                value={this.state.query}
-                onChange={this.handleChange.bind(this)}
+                value={query}
+                onChange={this.handleChange}
                  />
             </div>
               <ul className='nav flex-column'>

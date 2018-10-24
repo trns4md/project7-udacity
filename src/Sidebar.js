@@ -12,12 +12,12 @@ class Sidebar extends Component {
       searchVenue:[],
     }
   }
+ 
 //Handle User Input
   handleChange(event){
     this.setState({query:event.target.value});
     const query = event.target.value;
     this.handleFilter(query);
-   
   }
   //Handle Filtering Venues with Query
   handleFilter(query){
@@ -29,7 +29,12 @@ class Sidebar extends Component {
   });
 };
   render() {
-  
+    
+    let blahblah = this.state.query.length == 0;
+    const handler = blahblah
+      ? this.props.venues
+      : this.state.searchVenue
+    
     return (
       <nav id='sidebar'className='col-md-4'>
         <div>
@@ -49,7 +54,7 @@ class Sidebar extends Component {
                  />
             </div>
               <ul className='nav flex-column'>
-                {this.state.searchVenue.map((venueItem)=>
+                {handler.map((venueItem)=>
                   <li className='siteSquare' key={venueItem.venue.id}>
                     <h3 id="siteTitle"><a href={'#'}>{venueItem.venue.name}</a></h3>
                       <p>{venueItem.venue.location.formattedAddress}</p>

@@ -12,6 +12,7 @@ import 'bootstrap/dist/css/bootstrap.css';
     super(props);
       this.state={
         venues:[],
+        
       };
       
     }
@@ -78,18 +79,20 @@ import 'bootstrap/dist/css/bootstrap.css';
           infowindow.open(map, marker);
         })
       })
-     
+    
     }
+  
 
     
     render() {
-   
+
+
         return (
           <div>
               <Navigation />
               <div className='container'>
                 <div className='row'>
-                  <Sidebar venues={this.state.venues} />
+                  <Sidebar venues={this.state.venues} markerData={this.props.markerData}/>
                   <div id='map'className='col-md-8'></div>
                 </div>
             </div>

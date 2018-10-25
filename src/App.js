@@ -62,19 +62,19 @@ import 'bootstrap/dist/css/bootstrap.css';
             let marker = new window.google.maps.Marker({
             position: {lat: myVenue.venue.location.lat, lng: myVenue.venue.location.lng},
             map: map,
-            title: myVenue.venue.name,
+            name: myVenue.venue.name,
             animation: window.google.maps.Animation.DROP,
             icon:'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
           }); 
           return marker;
         })
         this.setState({mapMarkers: markerList})
-        console.log(this.state.markers) 
+        
       }
       
       filterMarkers(query){
         this.state.mapMarkers.filter(mapMarker=>{
-          if(mapMarker.title.toLowerCase().indexOf(query.toLowerCase()) == true);
+          if(mapMarker.mapMarker[0].name.toLowerCase().indexOf(query.toLowerCase()) == true);
           this.setState({mapMarkers: mapMarker.visible.true});
           this.setState({mapMarkers: mapMarker.visible.false});
         })
@@ -99,7 +99,7 @@ import 'bootstrap/dist/css/bootstrap.css';
      
   
     render() {
-
+      console.log(this.state.mapMarkers) 
         return (
           <div>
               <Navigation />

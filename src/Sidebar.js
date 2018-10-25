@@ -11,12 +11,17 @@ class Sidebar extends Component {
       query:'',
     }
     this.handleChange = this.handleChange.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
  
 //Handle User Input
 handleChange(event){
   this.props.onFilter(event.target.value);
   this.setState({query: event.target.value})
+}
+//Handle User Click
+handleClick(event){
+  this.props.handleClick(event.target);
 }
   
   render() {
@@ -48,7 +53,7 @@ handleChange(event){
               <ul className='nav flex-column'>
                 {handler.map((venueItem)=>
                   <li className='siteSquare' key={venueItem.venue.id}>
-                    <h3 id="siteTitle"><a href={'#'}>{venueItem.venue.name}</a></h3>
+                    <h3 id="siteTitle"onClick={this.handleClick}><a href={'#'}>{venueItem.venue.name}</a></h3>
                       <p>{venueItem.venue.location.formattedAddress}</p>
                   </li>)}
               </ul>

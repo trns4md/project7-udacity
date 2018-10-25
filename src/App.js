@@ -14,7 +14,7 @@ import 'bootstrap/dist/css/bootstrap.css';
         venues:[],
         query:'',
         searchVenue:[],
-        markers:[],
+        mapMarkers:[],
       };
       this.handleInputChange = this.handleInputChange.bind(this)
     }
@@ -66,45 +66,20 @@ import 'bootstrap/dist/css/bootstrap.css';
             animation: window.google.maps.Animation.DROP,
             icon:'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
           }); 
-          
+          return marker;
         })
-        this.setState({markers: markerList});
+        this.setState({mapMarkers: markerList})
+        console.log(this.state.markers) 
+      }
+      
+      filterMarkers(query){
+        this.state.mapMarkers.filter(mapMarker=>{
+          if(mapMarker.title.toLowerCase().indexOf(query.toLowerCase()) == true);
+          this.setState({mapMarkers: mapMarker.visible.true});
+          this.setState({mapMarkers: mapMarker.visible.false});
+        })
         
       }
-      
-      /*/Creating InfoWindow
-        let infowindow = new window.google.maps.InfoWindow();
-       //Creating a Marker
-        let markerList = this.state.venues.map(myVenue=>{  
-        let contentString = `${myVenue.venue.name}${myVenue.venue.location.formattedAddress}` 
-     
-        let marker = new window.google.maps.Marker({
-        position: {lat: myVenue.venue.location.lat, lng: myVenue.venue.location.lng},
-        map: map,
-        title: myVenue.venue.name,
-        animation: window.google.maps.Animation.DROP,
-        icon:'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
-      }); 
-      
-    
-      function toggleBounce(marker) {
-        if (marker.getAnimation() !== null) {
-          marker.setAnimation(null);
-        } else {
-          marker.setAnimation(window.google.maps.Animation.BOUNCE);
-            setTimeout(function(){
-              marker.setAnimation(null);
-            }, 1000)
-        }
-      }
-      //Open and Infowindow
-        marker.addListener('click', function(){
-          toggleBounce();
-          infowindow.setContent(contentString);
-          infowindow.open(map, marker);
-        })
-      })
-     }*/
        
       handleInputChange(query){
         this.setState({query: query});
@@ -118,31 +93,13 @@ import 'bootstrap/dist/css/bootstrap.css';
           filterVenue.push(venue);
          this.setState({searchVenue: filterVenue, mapMarkers: filterVenue})
       });
+      this.filterMarkers();
     };
-   /* handleClick(marker){
-      function toggleBounce() {
-        if (marker.getAnimation() !== null) {
-          marker.setAnimation(null);
-        } else {
-          marker.setAnimation(window.google.maps.Animation.BOUNCE);
-          setTimeout(function(){
-            marker.setAnimation(null);
-          }, 1000)
-        }
-        //Open and Infowindow
-        marker.addListener('click', function(){
-          toggleBounce();
-          infowindow.setContent(contentString);
-          infowindow.open(map, marker);
-        })
-      }
-    } */
+  
      
   
     render() {
-      
-      console.log(this.state.venues)
-      console.log(this.state.markers)
+
         return (
           <div>
               <Navigation />

@@ -8,7 +8,7 @@ class Navigation extends Component {
       render() {
           return (
             <nav id='navbar'className="navbar top-bar fixed">
-            <a id='navLogo'className="navbar-brand">Sugar Hill Neighborhood Map</a>
+            <a href='https://cityofsugarhill.com'id='navLogo'className="navbar-brand">Sugar Hill Neighborhood Map</a>
             
           </nav>
           )

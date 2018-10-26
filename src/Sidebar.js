@@ -21,7 +21,7 @@ handleChange(event){
 }
 //Handle User Click
 handleClick(event){
-  e.preventDefault();
+  event.preventDefault();
   this.props.passClick(event.target.value);
 }
   
@@ -34,7 +34,7 @@ handleClick(event){
       : this.props.searchVenue
     
     return (
-      <nav id='sidebar'className='col-md-4'>
+      <nav id='sidebar'className='col-md-4' >
         <div>
           <div className="input-group mb-3">
             <div className="input-group-prepend">
@@ -54,7 +54,7 @@ handleClick(event){
               <ul className='nav flex-column'>
                 {handler.map((venueItem)=>
                   <li className='siteSquare' key={venueItem.venue.id}>
-                    <h3 id="siteTitle"onClick={this.handleClick}><a href={'#'}>{venueItem.venue.name}</a></h3>
+                    <h3 id="siteTitle"onClick={this.handleClick}>{venueItem.venue.name}</h3>
                       <p>{venueItem.venue.location.formattedAddress}</p>
                   </li>)}
               </ul>

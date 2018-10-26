@@ -17,7 +17,7 @@ import 'bootstrap/dist/css/bootstrap.css';
         mapMarkers:[],
       };
       this.handleInputChange = this.handleInputChange.bind(this);
-      this.handleClick = this.handleClick.bind(this);
+      
     }
    
     componentDidMount() {
@@ -55,9 +55,9 @@ import 'bootstrap/dist/css/bootstrap.css';
         zoom: 13,
       })
       this.addMarker(map);
-    
+      //this.handleClick(map);
     }
-      
+     //Add Markers to the Map, Enable Infowindows, Create Map Marker Array 
       addMarker=(map)=>{
           let markerList = this.state.venues.map(myVenue=>{  
            let contentString = `${myVenue.venue.name}${myVenue.venue.location.formattedAddress}` 
@@ -86,11 +86,7 @@ import 'bootstrap/dist/css/bootstrap.css';
         this.setState({mapMarkers: markerList})
         
       }
-      handleClick (venue){
-        let marker = this.mapMarkers.filter(mapMarker => mapMarker.id == venue.id)[0];
-        console.log(marker)
-      }
-     
+     //Passing Query Input
       handleInputChange(query){
         this.setState({query: query});
         this.handleFilter(query);
@@ -114,16 +110,25 @@ import 'bootstrap/dist/css/bootstrap.css';
          mapMarker.setVisible(false);
       });  
     }
+    //Open Infowindows onClick of List Item
+    handleClick (map){
+      let marker = this.state.mapMarkers.filter(mapMarker => mapMarker.id === this.state.searchVenue.venue.id)[0];
+      if(marker.getAnimation() !== null) {marker.setAnimation(null); }
+      else{marker.setAnimation(window.google.maps.Animation.BOUNCE); }
+      setTimeout(()=>{marker.setAnimation(null, 1500)});
+      this.infowindow.open(map, marker);
+    }
+   
  
   
     render() {
-      console.log(this.state.venues)
+      console.log(this.state.searchVenue)
         return (
           <div>
               <Navigation />
               <div className='container'>
                 <div className='row'>
-                  <Sidebar venues={this.state.venues} mapMarkers={this.state.mapMarkers} searchVenue={this.state.searchVenue} handleClick={this.props.handleClick}query={this.props.query} onFilter={this.handleInputChange} />
+                  <Sidebar venues={this.state.venues} mapMarkers={this.state.mapMarkers} searchVenue={this.state.searchVenue} handleClick={this.props.passClick}query={this.props.query} onFilter={this.handleInputChange} />
                   <div id='map'className='col-md-8'></div>
                 </div>
             </div>

@@ -21,7 +21,8 @@ handleChange(event){
 }
 //Handle User Click
 handleClick(event){
-  this.props.handleClick(event.target);
+  e.preventDefault();
+  this.props.passClick(event.target.value);
 }
   
   render() {

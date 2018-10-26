@@ -43,7 +43,7 @@ a:visted{
   height: 100vh;
   left: 200px;
   width:75%;
-  position:fixed;
+  
 }
 body{
   height:100%;
@@ -71,14 +71,17 @@ a:visited{
 }
 
 
-@media only screen and (max-width:600px){
- 
+@media only screen and (max-width:360px){
+  #navbar{width: 105%}
+  #sidebar{
+    position:fixed;
+    width: 82%;
+  }
+  #map{position:fixed}
 }
 @media only screen and (min-width:768px){
-  #sidebarCan{
-    max-width: 100%;
-    flex:auto;
-  }
+ #navbar{width: 120%}
+ #map{height:120vh}
 }
 @media only screen and (min-width:992px){
   

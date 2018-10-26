@@ -34,7 +34,7 @@ handleClick(event){
       : this.props.searchVenue
     
     return (
-      <nav id='sidebar'className='col-md-4' >
+      <nav id='sidebar'className='col-xs-12 col-md-4 col-lg-5' >
         <div>
           <div className="input-group mb-3">
             <div className="input-group-prepend">

@@ -110,8 +110,8 @@ import 'bootstrap/dist/css/bootstrap.css';
       });  
     }
     //Open Infowindows onClick of List Item
-    handleClick (map){
-      const marker = this.state.mapMarkers.filter(mapMarker => mapMarker.id === this.state.searchVenue.venue.id);
+    handleClick = (map)=>{
+      const marker = this.mapMarkers.filter(mapMarker => mapMarker.id == this.venues.venue.id);
       if(marker.getAnimation() !== null) {marker.setAnimation(null); }
       else{marker.setAnimation(window.google.maps.Animation.BOUNCE); }
       setTimeout(()=>{marker.setAnimation(null, 1500)});
@@ -121,14 +121,14 @@ import 'bootstrap/dist/css/bootstrap.css';
  
   
     render() {
-      
+      console.log(this.state.mapMarkers)
         return (
           <div>
               <Navigation />
-              <div className='container'>
+              <div className='container-fluid'>
                 <div className='row'>
                   <Sidebar venues={this.state.venues} mapMarkers={this.state.mapMarkers} searchVenue={this.state.searchVenue} passClick={this.handleClick}query={this.props.query} onFilter={this.handleInputChange} />
-                  <div id='map'className='col-md-8'></div>
+                  <div id='map'className='col-xs-12 col-md-11 col-lg-11'></div>
                 </div>
             </div>
           </div>               

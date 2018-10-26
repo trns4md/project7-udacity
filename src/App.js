@@ -16,7 +16,8 @@ import 'bootstrap/dist/css/bootstrap.css';
         searchVenue:[],
         mapMarkers:[],
       };
-      this.handleInputChange = this.handleInputChange.bind(this)
+      this.handleInputChange = this.handleInputChange.bind(this);
+      this.handleClick = this.handleClick.bind(this);
     }
    
     componentDidMount() {
@@ -54,36 +55,46 @@ import 'bootstrap/dist/css/bootstrap.css';
         zoom: 13,
       })
       this.addMarker(map);
+    
     }
       
       addMarker=(map)=>{
           let markerList = this.state.venues.map(myVenue=>{  
-          // let contentString = `${myVenue.venue.name}${myVenue.venue.location.formattedAddress}` 
+           let contentString = `${myVenue.venue.name}${myVenue.venue.location.formattedAddress}` 
             let marker = new window.google.maps.Marker({
             position: {lat: myVenue.venue.location.lat, lng: myVenue.venue.location.lng},
             map: map,
             name: myVenue.venue.name,
+            id: myVenue.venue.id,
             animation: window.google.maps.Animation.DROP,
             icon:'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
           }); 
+          marker.addListener('click',()=>{
+            if(marker.getAnimation() !== null) {marker.setAnimation(null); }
+            else{marker.setAnimation(window.google.maps.Animation.BOUNCE); }
+            setTimeout(()=>{marker.setAnimation(null, 1500)});
+            infowindow.open(map, marker);
+          });
+          let infoContent =`<h3>${myVenue.venue.name}</h3>`
+
+          let infowindow = new window.google.maps.InfoWindow({
+            content: infoContent
+          });
+
           return marker;
         })
         this.setState({mapMarkers: markerList})
         
       }
-      
-      filterMarkers(query){
-        this.state.mapMarkers.filter(mapMarker=>{
-          if(mapMarker.mapMarker[0].name.toLowerCase().indexOf(query.toLowerCase()) == true);
-          this.setState({mapMarkers: mapMarker.visible.true});
-          this.setState({mapMarkers: mapMarker.visible.false});
-        })
-        
+      handleClick (venue){
+        let marker = this.mapMarkers.filter(mapMarker => mapMarker.id == venue.id)[0];
+        console.log(marker)
       }
-       
+     
       handleInputChange(query){
         this.setState({query: query});
         this.handleFilter(query);
+        this.filterMarkers(query);
       }
       //Handle Filtering Venues with Query
       handleFilter(query){
@@ -91,21 +102,28 @@ import 'bootstrap/dist/css/bootstrap.css';
         this.state.venues.filter(venue=>{
           if(venue.venue.name.toLowerCase().indexOf(query.toLowerCase()) >=0)
           filterVenue.push(venue);
-         this.setState({searchVenue: filterVenue, mapMarkers: filterVenue})
+         this.setState({searchVenue: filterVenue})
       });
-      this.filterMarkers();
-    };
-  
-     
+       
+    }
+  //Filter Map Markers
+    filterMarkers(query){
+      this.state.mapMarkers.forEach(mapMarker => {
+         mapMarker.name.toLowerCase().includes(query.toLowerCase()) == true ?
+         mapMarker.setVisible(true) :
+         mapMarker.setVisible(false);
+      });  
+    }
+ 
   
     render() {
-      console.log(this.state.mapMarkers) 
+      console.log(this.state.venues)
         return (
           <div>
               <Navigation />
               <div className='container'>
                 <div className='row'>
-                  <Sidebar venues={this.state.venues} searchVenue={this.state.searchVenue} handleClick={this.props.handleClick}query={this.props.query} onFilter={this.handleInputChange}/>
+                  <Sidebar venues={this.state.venues} mapMarkers={this.state.mapMarkers} searchVenue={this.state.searchVenue} handleClick={this.props.handleClick}query={this.props.query} onFilter={this.handleInputChange} />
                   <div id='map'className='col-md-8'></div>
                 </div>
             </div>

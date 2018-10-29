@@ -15,6 +15,8 @@ import 'bootstrap/dist/css/bootstrap.css';
         query:'',
         searchVenue:[],
         mapMarkers:[],
+        infoWindow:null,
+        map:null,
       };
       this.handleInputChange = this.handleInputChange.bind(this);
       
@@ -55,10 +57,10 @@ import 'bootstrap/dist/css/bootstrap.css';
         zoom: 13,
       })
       this.addMarker(map);
-      //this.handleClick(map);
+      this.setState({map: map});
     }
-     //Add Markers to the Map, Enable Infowindows, Create Map Marker Array 
-      addMarker=(map)=>{
+      //Creating Map Markers
+      addMarker= map =>{
           let markerList = this.state.venues.map(myVenue=>{  
             let marker = new window.google.maps.Marker({
             position: {lat: myVenue.venue.location.lat, lng: myVenue.venue.location.lng},
@@ -69,22 +71,40 @@ import 'bootstrap/dist/css/bootstrap.css';
             icon:'http://maps.google.com/mapfiles/ms/icons/green-dot.png',
           }); 
           marker.addListener('click',()=>{
-            if(marker.getAnimation() !== null) {marker.setAnimation(null); }
-            else{marker.setAnimation(window.google.maps.Animation.BOUNCE); }
-            setTimeout(()=>{marker.setAnimation(null, 1500)});
-            infowindow.open(map, marker);
+            this.state.venues.forEach(venue=>{
+              if(marker.id === venue.venue.id){
+                this.openInfoWindow(marker, venue);
+              }
+            });
+            
           });
-          let infoContent =`<h3>${myVenue.venue.name}</h3>`
-
           let infowindow = new window.google.maps.InfoWindow({
-            content: infoContent
+            content: '',
+            map: map,
+            venue:'',
           });
-
+          this.setState({
+            infoWindow: infowindow
+          });
           return marker;
-        })
+        });
         this.setState({mapMarkers: markerList})
+      };
+      
+      openInfoWindow=(marker, venue)=>{
         
-      }
+        if(marker.getAnimation() !== null) {
+          marker.setAnimation(null); 
+        }else{
+          marker.setAnimation(window.google.maps.Animation.BOUNCE); 
+        } setTimeout(()=>{
+          marker.setAnimation(null, 1500)
+        });
+        
+        this.state.infoWindow.setContent(`<h4>${venue.venue.name}</h4>`);
+        this.state.infoWindow.open(this.state.map, marker);
+      };
+  
      //Passing Query Input
       handleInputChange(query){
         this.setState({query: query});
@@ -104,31 +124,39 @@ import 'bootstrap/dist/css/bootstrap.css';
   //Filter Map Markers
     filterMarkers(query){
       this.state.mapMarkers.forEach(mapMarker => {
-         mapMarker.name.toLowerCase().includes(query.toLowerCase()) === true ?
-         mapMarker.setVisible(true) :
-         mapMarker.setVisible(false);
+         mapMarker.name.toLowerCase().includes(query.toLowerCase()) === true 
+         ? mapMarker.setVisible(true) 
+         : mapMarker.setVisible(false);
       });  
     }
+    
     //Open Infowindows onClick of List Item
-    handleClick = (map)=>{
-      const marker = this.mapMarkers.filter(mapMarker => mapMarker.id == this.venues.venue.id);
-      if(marker.getAnimation() !== null) {marker.setAnimation(null); }
-      else{marker.setAnimation(window.google.maps.Animation.BOUNCE); }
-      setTimeout(()=>{marker.setAnimation(null, 1500)});
-      this.infowindow.open(map, marker);
-    }
-   
+    handleClick = venue =>{
+      console.log(venue);
+      this.state.mapMarkers.forEach(mapMarker =>{
+        if(mapMarker.id === venue.venue.id){
+          console.log(mapMarker, venue);
+          this.openInfoWindow(mapMarker, venue);
+        }});
+      }
+    
  
   
     render() {
-      console.log(this.state.mapMarkers)
+      
         return (
           <div>
-              <Navigation />
+            <Navigation />
               <div className='container-fluid'>
                 <div className='row'>
-                  <Sidebar venues={this.state.venues} mapMarkers={this.state.mapMarkers} searchVenue={this.state.searchVenue} passClick={this.handleClick}query={this.props.query} onFilter={this.handleInputChange} />
-                  <div id='map'className='col-xs-12 col-md-11 col-lg-11'></div>
+                  <Sidebar 
+                    venues={this.state.venues} 
+                    mapMarkers={this.state.mapMarkers} 
+                    searchVenue={this.state.searchVenue} 
+                    passClick={this.handleClick}
+                    query={this.props.query} 
+                    onFilter={this.handleInputChange} />
+                  <div id='map'className='col-xs-12 col-md-11 col-lg-9'></div>
                 </div>
             </div>
           </div>               

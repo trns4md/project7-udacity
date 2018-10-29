@@ -22,19 +22,15 @@ body{
   margin-left: -250px;
   left: 250px;
   width: 25%;
-  position: fixed;
+  position: absolute;
   height: 100%;
-  overflow-y: auto;
+  overflow: visible;
   z-index: 1000;
-  transition: all 0.4s ease 0s;
-  
+  margin-bottom: 1rem;
+  overflow-x:auto;
 }
-.venueList{
-  list-style-type: none;
-}
-.listItem {
-  background-color: white;
-  color:  #73655E;
+h4{
+  font-size: 12px;
 }
 a:visted{
   color:#78AB35;
@@ -43,13 +39,10 @@ a:visted{
   height: 100vh;
   left: 200px;
   width:75%;
-  
+  margin-left: 11%;
+  position: absolute;
 }
-body{
-  height:100%;
-  margin:0;
-  padding:0;
-}
+
 .container{
 margin-left:0;
 margin-right:0;
@@ -69,20 +62,39 @@ a:visited{
 .places{
   background-color: white;
 }
+.row{
+  position:relative;
+}
 
 
 @media only screen and (max-width:360px){
-  #navbar{width: 105%}
+  #navbar{
+    width: 125%;
+    padding-left: 1%;}
   #sidebar{
-    position:fixed;
-    width: 82%;
+    position: relative;
+    width: 123%;
+    display:block;
   }
-  #map{position:fixed}
+  #map{
+    position:relative;
+    display:block;
+    margin:0;
+    left:0;
+    overflow: visible;
+  }
 }
 @media only screen and (min-width:768px){
  #navbar{width: 120%}
- #map{height:120vh}
+ #map{
+   height:120vh;
+   position: relative;
+   margin-left:inherit;
+   width: 100%;
+  }
 }
-@media only screen and (min-width:992px){
-  
+@media only screen and (min-width:1200px){
+  #map{
+    margin-left:11%;
+  }
 }

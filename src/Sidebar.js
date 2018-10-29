@@ -20,9 +20,8 @@ handleChange(event){
   this.setState({query: event.target.value})
 }
 //Handle User Click
-handleClick(event){
-  event.preventDefault();
-  this.props.passClick(event.target.value);
+handleClick(venue){
+  this.props.passClick(venue);
 }
   
   render() {
@@ -35,7 +34,7 @@ handleClick(event){
     
     return (
       <nav id='sidebar'className='col-xs-12 col-md-4 col-lg-5' >
-        <div>
+        
           <div className="input-group mb-3">
             <div className="input-group-prepend">
               <span className="input-group-text" id="basic-addon1">Filter</span>
@@ -54,11 +53,12 @@ handleClick(event){
               <ul className='nav flex-column'>
                 {handler.map((venueItem)=>
                   <li className='siteSquare' key={venueItem.venue.id}>
-                    <h3 id="siteTitle"onClick={this.handleClick}>{venueItem.venue.name}</h3>
+                    <h4 id="siteTitle"onClick={() => this.handleClick(venueItem)}>{venueItem.venue.name}</h4>
                       <p>{venueItem.venue.location.formattedAddress}</p>
                   </li>)}
               </ul>
-        </div> 
+              
+  
       </nav>
     );
   }

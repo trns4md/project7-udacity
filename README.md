@@ -1,3 +1,13 @@
+## Dependencies for this project
+Bootstrap was used to style this project
+Axios 
+
+The following API's are used in this project:
+
+-Google Maps API
+-Foursquare API
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>

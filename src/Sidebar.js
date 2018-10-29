@@ -33,7 +33,8 @@ handleClick(venue){
       : this.props.searchVenue
     
     return (
-      <nav id='sidebar'className='col-xs-12 col-md-4 col-lg-5' >
+      <nav id='sidebar'className='col-xs-12 col-md-4 col-lg-5' aria-label='Secondary'
+      role='listbox'>
         
           <div className="input-group mb-3">
             <div className="input-group-prepend">
@@ -52,7 +53,7 @@ handleClick(venue){
             </div>
               <ul className='nav flex-column'>
                 {handler.map((venueItem)=>
-                  <li className='siteSquare' key={venueItem.venue.id}>
+                  <li className='siteSquare' role='listitem' key={venueItem.venue.id}>
                     <h4 id="siteTitle"onClick={() => this.handleClick(venueItem)}>{venueItem.venue.name}</h4>
                       <p>{venueItem.venue.location.formattedAddress}</p>
                   </li>)}

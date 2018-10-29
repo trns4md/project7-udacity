@@ -150,13 +150,14 @@ import 'bootstrap/dist/css/bootstrap.css';
               <div className='container-fluid'>
                 <div className='row'>
                   <Sidebar 
+                    role='complementary'
                     venues={this.state.venues} 
                     mapMarkers={this.state.mapMarkers} 
                     searchVenue={this.state.searchVenue} 
                     passClick={this.handleClick}
                     query={this.props.query} 
                     onFilter={this.handleInputChange} />
-                  <div id='map'className='col-xs-12 col-md-11 col-lg-9'></div>
+                  <div id='map'className='col-xs-12 col-md-11 col-lg-9' role="application" aria-label="Map with venues"></div>
                 </div>
             </div>
           </div>               

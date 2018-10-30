@@ -17,13 +17,17 @@ import 'bootstrap/dist/css/bootstrap.css';
         mapMarkers:[],
         infoWindow:null,
         map:null,
+        hasError: false,
       };
       this.handleInputChange = this.handleInputChange.bind(this);
-      
+      this.mapError = this.mapError.bind(this)
     }
    
     componentDidMount() {
       this.getVenues();
+    }
+    componentDidCatch(error){
+      this.setState({hasError: true})
     }
          //Request to FourSquare API
         getVenues=()=>{
@@ -48,6 +52,7 @@ import 'bootstrap/dist/css/bootstrap.css';
      //Create the map
     renderMap = () => {
       loadMap('https://maps.googleapis.com/maps/api/js?key=AIzaSyAGLWvOb4JYsG5LujGnURa4qVYfh03EB_Y&callback=initMap');
+
       window.initMap = this.initMap;
     }
     initMap=()=>{
@@ -56,8 +61,17 @@ import 'bootstrap/dist/css/bootstrap.css';
         center: {lat: 34.1064895,lng: -84.0335197},
         zoom: 13,
       })
+      window.gm_authFailure = function() {
+        // remove the map div or call another API to load map
+       //  show a message to the user
+       alert('Whoopsy! Google maps failed to load!');
+    }
       this.addMarker(map);
       this.setState({map: map});
+    }
+    //Handling Google Map Errors
+    mapError=()=>{
+      alert("Whoops! Google Maps is experiencing an issue. Please try reloading the page.")
     }
       //Creating Map Markers
       addMarker= map =>{
@@ -101,7 +115,7 @@ import 'bootstrap/dist/css/bootstrap.css';
           marker.setAnimation(null, 1500)
         });
         
-        this.state.infoWindow.setContent(`<h4>${venue.venue.name}</h4>`);
+        this.state.infoWindow.setContent(`<h4>${venue.venue.name}</h4>${venue.venue.location.formattedAddress}<p></p>`);
         this.state.infoWindow.open(this.state.map, marker);
       };
   
@@ -143,7 +157,9 @@ import 'bootstrap/dist/css/bootstrap.css';
  
   
     render() {
-      
+        if(this.state.hasError){
+          return <h1>Whoopsy! There seems to be a problem!</h1>
+        }
         return (
           <div>
             <Navigation />
@@ -157,7 +173,7 @@ import 'bootstrap/dist/css/bootstrap.css';
                     passClick={this.handleClick}
                     query={this.props.query} 
                     onFilter={this.handleInputChange} />
-                  <div id='map'className='col-xs-12 col-md-11 col-lg-9' role="application" aria-label="Map with venues"></div>
+                  <div id='map'className='col-xs-12 col-md-11 col-lg-9' aria-labelledby='application' aria-label="Map with venues"tabIndex='4'></div>
                 </div>
             </div>
           </div>               
@@ -172,6 +188,7 @@ import 'bootstrap/dist/css/bootstrap.css';
     script.async = true
     script.defer = true
     index.parentNode.insertBefore(script, index)
+    
   }
  
 export default App;

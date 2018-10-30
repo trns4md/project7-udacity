@@ -33,12 +33,12 @@ handleClick(venue){
       : this.props.searchVenue
     
     return (
-      <nav id='sidebar'className='col-xs-12 col-md-4 col-lg-5' aria-label='Secondary'
-      role='listbox'>
+      <nav id='sidebar'className='col-xs-12 col-md-4 col-lg-5' tabIndex='1'
+      aria-labelledby='listbox'>
         
           <div className="input-group mb-3">
             <div className="input-group-prepend">
-              <span className="input-group-text" id="basic-addon1">Filter</span>
+              <span className="input-group-text" id="basic-addon1"tabIndex='2'aria-labelledby='input'>Filter</span>
               </div>
               <input 
                 id='inputFilter' 
@@ -53,7 +53,7 @@ handleClick(venue){
             </div>
               <ul className='nav flex-column'>
                 {handler.map((venueItem)=>
-                  <li className='siteSquare' role='listitem' key={venueItem.venue.id}>
+                  <li className='siteSquare' role='listitem' key={venueItem.venue.id} tabIndex='3'aria-labelledby='listitem'>
                     <h4 id="siteTitle"onClick={() => this.handleClick(venueItem)}>{venueItem.venue.name}</h4>
                       <p>{venueItem.venue.location.formattedAddress}</p>
                   </li>)}
